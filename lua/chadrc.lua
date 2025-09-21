@@ -1,6 +1,7 @@
 ---@diagnostic disable: undefined-global
 ---@type ChadrcConfig
 local M = {}
+local monero = require("custom.monero")
 
 M.base46 = {
   theme = "vscode_dark"
@@ -8,7 +9,7 @@ M.base46 = {
 
 M.ui = {
   statusline = {
-    theme = "minimal",,
+    theme = "minimal",
     separator_style = "round",
     overriden_modules = nil,
   },
@@ -17,10 +18,7 @@ M.ui = {
   },
 }
 
-M.nvdash = {
-  load_on_startup = true,
-
-header = {
+local header = {
 "+=====-----::---:::---::::::: :    ::::                           :-      ::::                           :::::::::--:::::::--",
 "===-======----:::::--::::::: : :::  :::                                  :                                 :::::::::::::::-++",
 "==----==-------::::----:::::::  ::   :                                   :                                  ::::::::::----+==",
@@ -56,9 +54,19 @@ header = {
 "----::::::::::                                           :::::::           :              :   :  :::::::-:------=-====*+==-==",
 "---:::::--:::::                                        :   :::::        ::::             ::::::::::------------==============",
 "----::--:::::::                                           :            :::::: :         :::::::::::::::::---------=+=====++==",
-},
+}
 
-buttons = {
+local ok, price = pcall(monero.get_price)
+if ok and price then
+  table.insert(header, price)
+else
+  table.insert(header, "Monero: N/A")
+end  
+
+M.nvdash = {
+  load_on_startup = true,
+  header = header,
+  buttons = {
     { txt = "  Find File",    keys = "Spc f f", cmd = "Telescope find_files" },
     { txt = "󰈚  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
     { txt = "󰈭  Find Word",    keys = "Spc f w", cmd = "Telescope live_grep" },
