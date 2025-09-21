@@ -8,8 +8,8 @@ M.base46 = {
 
 M.ui = {
   statusline = {
-    theme = "minimal",        -- "default", "vscode", "minimal"
-    separator_style = "round", -- "default", "round", "block"
+    theme = "minimal",,
+    separator_style = "round",
     overriden_modules = nil,
   },
   tabufline = {

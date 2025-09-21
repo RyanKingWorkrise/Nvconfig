@@ -1,12 +1,10 @@
 return {
-  -- LSP servers
   {
     "neovim/nvim-lspconfig",
     config = function()
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
-      -- Python LSP
       vim.lsp.start({
         name = "pyright",
         cmd = { "pyright-langserver", "--stdio" },
@@ -17,7 +15,6 @@ return {
         ),
       })
 
-      -- TypeScript / JavaScript LSP
       vim.lsp.start({
         name = "tsserver",
         cmd = { "typescript-language-server", "--stdio" },
@@ -29,16 +26,13 @@ return {
       })
     end,
   },
-
   
-  -- GitHub Copilot plugin
   {
     "github/copilot.vim",
     lazy = false,
 
   },
 
-  -- nvim-cmp + LuaSnip
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -108,20 +102,19 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "copilot" },        -- AI suggestions
-          { name = "nvim_lsp" },       -- LSP completions
-          { name = "luasnip" },        -- Snippets
-          { name = "buffer" },          -- Buffer words
-          { name = "path" },            -- Filesystem paths
-          { name = "nvim_lua" },        -- Lua API
-          { name = "async_path" },      -- async path completion
+          { name = "copilot" },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
+          { name = "path" },
+          { name = "nvim_lua" },
+          { name = "async_path" },
         }),
-        experimental = { ghost_text = true }, -- shows inline suggestions
+        experimental = { ghost_text = true },
       })
     end,
   },
 
-  -- Copilot integration for nvim-cmp
   {
     "zbirenbaum/copilot-cmp",
     dependencies = { "github/copilot.vim" },
@@ -130,7 +123,6 @@ return {
     end,
   },
 
-  -- Optional: formatting
   {
     "stevearc/conform.nvim",
     opts = require("configs.conform"),
