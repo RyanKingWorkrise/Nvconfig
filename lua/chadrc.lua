@@ -73,6 +73,7 @@ M.nvdash = {
     { txt = "  Bookmarks",    keys = "Spc m a", cmd = "Telescope marks" },
     { txt = "  Themes",       keys = "Spc t h", cmd = "Telescope themes" },
     { txt = "  Mappings",     keys = "Spc c h", cmd = "NvCheatsheet" },
+    { txt = "see how much money i am losing", keys = "Spc c y", cmd ="lua require('custom.crypto').open()"},
   },
 }
 

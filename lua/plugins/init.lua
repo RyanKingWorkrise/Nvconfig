@@ -2,35 +2,30 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local cmp_nvim_lsp = require("cmp_nvim_lsp")
+      local cmp_nvim_lsp = require "cmp_nvim_lsp"
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
-      vim.lsp.start({
+      vim.lsp.start {
         name = "pyright",
         cmd = { "pyright-langserver", "--stdio" },
         capabilities = capabilities,
         filetypes = { "python" },
-        root_dir = vim.fs.dirname(
-          vim.fs.find({ "pyproject.toml", ".git" }, { upward = true })[1] or vim.loop.cwd()
-        ),
-      })
+        root_dir = vim.fs.dirname(vim.fs.find({ "pyproject.toml", ".git" }, { upward = true })[1] or vim.loop.cwd()),
+      }
 
-      vim.lsp.start({
+      vim.lsp.start {
         name = "tsserver",
         cmd = { "typescript-language-server", "--stdio" },
         capabilities = capabilities,
         filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-        root_dir = vim.fs.dirname(
-          vim.fs.find({ "package.json", ".git" }, { upward = true })[1] or vim.loop.cwd()
-        ),
-      })
+        root_dir = vim.fs.dirname(vim.fs.find({ "package.json", ".git" }, { upward = true })[1] or vim.loop.cwd()),
+      }
     end,
   },
-  
+
   {
     "github/copilot.vim",
     lazy = false,
-
   },
 
   {
@@ -44,10 +39,10 @@ return {
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
         config = function()
-          require("luasnip").config.set_config({
+          require("luasnip").config.set_config {
             history = true,
             updateevents = "TextChanged,TextChangedI",
-          })
+          }
           require("luasnip.loaders.from_vscode").lazy_load()
         end,
       },
@@ -56,32 +51,32 @@ return {
       {
         "windwp/nvim-autopairs",
         config = function()
-          local npairs = require("nvim-autopairs")
-          npairs.setup({
+          local npairs = require "nvim-autopairs"
+          npairs.setup {
             fast_wrap = {},
             disable_filetype = { "TelescopePrompt", "vim" },
-          })
+          }
 
-          local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
           require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
       },
     },
     config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
+      local cmp = require "cmp"
+      local luasnip = require "luasnip"
 
-      cmp.setup({
+      cmp.setup {
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert({
+        mapping = cmp.mapping.preset.insert {
           ["<C-d>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<CR>"] = cmp.mapping.confirm { select = true },
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -100,8 +95,8 @@ return {
               fallback()
             end
           end, { "i", "s" }),
-        }),
-        sources = cmp.config.sources({
+        },
+        sources = cmp.config.sources {
           { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
@@ -109,9 +104,9 @@ return {
           { name = "path" },
           { name = "nvim_lua" },
           { name = "async_path" },
-        }),
+        },
         experimental = { ghost_text = true },
-      })
+      }
     end,
   },
 
@@ -125,7 +120,21 @@ return {
 
   {
     "stevearc/conform.nvim",
-    opts = require("configs.conform"),
+    opts = require "configs.conform",
   },
-}
 
+{
+  "ellisonleao/carbon-now.nvim",
+  lazy = true,
+  cmd = "CarbonNow",
+  opts = {
+    options = {
+      theme = "solarized",
+      font_family = "Monoid",
+    },
+  },
+},
+
+
+
+}
