@@ -4,7 +4,7 @@ local M = {}
 local monero = require("custom.monero")
 
 M.base46 = {
-  theme = "vscode_dark"
+  theme = "chocolate"
 }
 
 M.ui = {

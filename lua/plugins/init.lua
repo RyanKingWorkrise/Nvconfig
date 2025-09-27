@@ -123,18 +123,15 @@ return {
     opts = require "configs.conform",
   },
 
-{
-  "ellisonleao/carbon-now.nvim",
-  lazy = true,
-  cmd = "CarbonNow",
-  opts = {
-    options = {
-      theme = "solarized",
-      font_family = "Monoid",
+  {
+    "ellisonleao/carbon-now.nvim",
+    lazy = true,
+    cmd = "CarbonNow",
+    opts = {
+      options = {
+        theme = "solarized",
+        font_family = "Monoid",
+      },
     },
   },
-},
-
-
-
 }
